@@ -1,6 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import './index.css';
 import {
   searchImage
 } from '../../modules/search'
@@ -12,11 +13,13 @@ const Home = props => (
       props.searchImage(e)}
     }>
       <input type="search" />
-      <input type="submit" value="Submit"/>
+      <input type="submit" value="Search"/>
     </form>
 
     <p>{props.searching ? 'Searching...' : ''}</p>
-    <img src={props.value} />
+    <div className="gridContainer">
+      {props.value.map((url, index) => <img key={index} src={url} className="gridImage" alt=""/>)}
+    </div>
 
   </div>
 )

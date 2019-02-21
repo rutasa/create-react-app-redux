@@ -9,7 +9,7 @@ export const SEARCH_IMAGE = 'SEARCH_IMAGE'
 export const SEARCHING_IMAGE = 'SEARCHING_IMAGE'
 
 const initialState = {
-  value: "",
+  value: [],
   searching: false,
 }
 
@@ -43,9 +43,11 @@ export const searchImage = (e) => {
     return unsplash.search.photos(e.target.querySelector('input').value, 1)
       .then(toJson)
       .then(json => {
+        const results = json.results.map(x => x.urls.raw)
+
         dispatch({
           type: SEARCH_IMAGE,
-          payload: JSON.stringify(json.results[0].urls.raw)
+          payload: results
         })
       })
   }
