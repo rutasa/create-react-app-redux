@@ -1,55 +1,35 @@
 import React from 'react'
-import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync
-} from '../../modules/counter'
+  searchImage
+} from '../../modules/search'
 
 const Home = props => (
   <div>
-    <h1>Home</h1>
-    <p>Count: {props.count}</p>
+    <form onSubmit={e => {
+      e.preventDefault();
+      props.searchImage(e)}
+    }>
+      <input type="search" />
+      <input type="submit" value="Submit"/>
+    </form>
 
-    <p>
-      <button onClick={props.increment}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-        Increment Async
-      </button>
-    </p>
+    <p>{props.searching ? 'Searching...' : ''}</p>
+    <img src={props.value} />
 
-    <p>
-      <button onClick={props.decrement}>Decrement</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-        Decrement Async
-      </button>
-    </p>
-
-    <p>
-      <button onClick={() => props.changePage()}>
-        Go to about page via redux
-      </button>
-    </p>
   </div>
 )
 
 const mapStateToProps = ({ counter }) => ({
-  count: counter.count,
-  isIncrementing: counter.isIncrementing,
-  isDecrementing: counter.isDecrementing
+  value: counter.value,
+  searching: counter.searching,
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      increment,
-      incrementAsync,
-      decrement,
-      decrementAsync,
-      changePage: () => push('/about-us')
+      searchImage,
     },
     dispatch
   )
