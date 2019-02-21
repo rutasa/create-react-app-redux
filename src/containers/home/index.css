@@ -9,6 +9,10 @@ img {
     border: 1px solid black;
 }
 
+.notFoundExplainer {
+    margin-left: 15px;
+}
+
 input[type="search"] {
     width: 70%;
     border-radius: 5px;

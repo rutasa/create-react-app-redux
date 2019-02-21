@@ -18,6 +18,7 @@ const Home = props => (
 
     <p>{props.searching ? 'Searching...' : ''}</p>
     <div className="gridContainer">
+      {props.value.length === 0 ? <p className="notFoundExplainer">No images found</p> : ''}
       {props.value.map((url, index) => <img key={index} src={url} className="gridImage" alt=""/>)}
     </div>
 
