@@ -5,8 +5,8 @@ const unsplash = new Unsplash({
   secret: "8f0cfa55745b586056e5d66c546fadd616b9de1c0f21c203085fed3dea4693bc"
 });
 
-export const SEARCH_IMAGE = 'SEARCH_IMAGE'
-export const SEARCHING_IMAGE = 'SEARCHING_IMAGE'
+export const SEARCH_IMAGES = 'SEARCH_IMAGES'
+export const SEARCHING_IMAGES = 'SEARCHING_IMAGES'
 
 const initialState = {
   value: [],
@@ -16,13 +16,13 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
 
-    case SEARCHING_IMAGE:
+    case SEARCHING_IMAGES:
       return {
         ...state,
         searching: true
       }
 
-    case SEARCH_IMAGE:
+    case SEARCH_IMAGES:
       return {
         ...state,
         value: action.payload,
@@ -34,10 +34,10 @@ export default (state = initialState, action) => {
   }
 }
 
-export const searchImage = (e) => {
+export const searchImages = (e) => {
   return dispatch => {
     dispatch({
-      type: SEARCHING_IMAGE
+      type: SEARCHING_IMAGES
     })
 
     return unsplash.search.photos(e.target.querySelector('input').value, 1)
@@ -46,7 +46,7 @@ export const searchImage = (e) => {
         const results = json.results.map(x => x.urls.raw)
 
         dispatch({
-          type: SEARCH_IMAGE,
+          type: SEARCH_IMAGES,
           payload: results
         })
       })

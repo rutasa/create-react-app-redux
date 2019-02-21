@@ -3,14 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './index.css';
 import {
-  searchImage
+  searchImages
 } from '../../modules/search'
 
 const Home = props => (
   <div>
     <form onSubmit={e => {
       e.preventDefault();
-      props.searchImage(e)}
+      props.searchImages(e)}
     }>
       <input type="search" />
       <input type="submit" value="Search"/>
@@ -25,15 +25,15 @@ const Home = props => (
   </div>
 )
 
-const mapStateToProps = ({ counter }) => ({
-  value: counter.value,
-  searching: counter.searching,
+const mapStateToProps = ({ search }) => ({
+  value: search.value,
+  searching: search.searching,
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      searchImage,
+      searchImages,
     },
     dispatch
   )
